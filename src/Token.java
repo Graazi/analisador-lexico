@@ -1,19 +1,18 @@
+import java.util.ArrayList;
+import java.util.regex.*;
+
 public class Token {
-    public final String type;
-    public final String lexeme;
-    public final int line;
-    public final int col;
+        String valor;
+        String tipo;
 
-    public Token(String type, String lexeme, int line, int col) {
-        this.type = type;
-        this.lexeme = lexeme;
-        this.line = line;
-        this.col = col;
-    }
+        public Token(String valor, String tipo) {
+            this.valor = valor;
+            this.tipo = tipo;
+        }
 
-    @Override
-    public String toString() {
-        return String.format("%-12s '%s'  (l%d:c%d)", type, lexeme, line, col);
+        @Override
+        public String toString() {
+            return "(" + valor + ", " + tipo + ")";
+        }
     }
-}
 

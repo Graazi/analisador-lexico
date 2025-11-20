@@ -1,41 +1,27 @@
-import java.io.*;
+import java.util.ArrayList;
 
-public class main {
-
+class main {
     public static void main(String[] args) {
 
-        if (args.length != 1) {
-            System.out.println("Uso: java Main <arquivo_fonte>");
-            return;
-        }
+        AnalisadorLexico analisador = new AnalisadorLexico();
 
-        String fileName = args[0];
-        StringBuilder sb = new StringBuilder();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null)
-                sb.append(line).append("\n");
-        } catch (Exception e) {
-            System.out.println("Erro ao abrir arquivo: " + e.getMessage());
-            return;
-        }
+        final String codigoFonte =  
+          "//teste\n" +
+    " main() {\n" +
+    "    int num = 123;\n" +
+    "    prinln(\"funcionou\");\n" +
+    "    \n" +
+    "    float soma = 100 + 100.1\n" +
+                  "/* Este é um comentário\n" +
+       "de múltiplas linhas */\n" +
+                  "Boolean x == true */\n" +
+    "}";
 
-        ScannerLexico scanner = new ScannerLexico(sb.toString());
-        scanner.scan();
+        ArrayList<Token> tokens = analisador.analisar(codigoFonte);
 
-        System.out.println("---- Tokens reconhecidos ----");
-        for (Token t : scanner.tokens) {
-            System.out.println(t);
-        }
-
-        if (!scanner.errors.isEmpty()) {
-            System.out.println("\nCompilação: FALHOU");
-            for (LexError e : scanner.errors) {
-                System.out.println(e);
-            }
-        } else {
-            System.out.println("\nCompilação: SUCESSO. Nenhum erro léxico encontrado.");
+        for (Token token : tokens) {
+            System.out.println(token);
         }
     }
 }
