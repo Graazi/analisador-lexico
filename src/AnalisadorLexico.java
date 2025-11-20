@@ -53,3 +53,18 @@ public class AnalisadorLexico {
     }
 
 }
+
+class Token {
+    public final String lexema;
+    public final String tipo;
+
+    public Token(String lexema, String tipo) {
+        this.lexema = lexema;
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Token{lexema='%s', tipo='%s'}", lexema, tipo);
+    }
+}
